@@ -1,0 +1,272 @@
+/* ----------------------------------------
+   Базовые сбросы и шрифты
+   ---------------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: #564787;
+    color: #2d2a3e;
+    padding: 24px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.container {
+    max-width: 820px;
+    width: 100%;
+    background: #F2FDDF;
+    border-radius: 32px;
+    box-shadow: 0 20px 60px rgba(86, 71, 135, 0.35);
+    padding: 40px 48px;
+    margin-top: 20px;
+    border: 2px solid #DBCBD8;
+    position: relative;
+}
+
+/* Декоративная полоска */
+.container::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 40px;
+    right: 40px;
+    height: 4px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #564787 0%, #DBCBD8 40%, #F2FDDF 70%, #564787 100%);
+    opacity: 0.5;
+}
+
+/* ----------------------------------------
+   Декоративные точки
+   ---------------------------------------- */
+.dot-deco {
+    position: absolute;
+    border-radius: 50%;
+    background: #DBCBD8;
+    opacity: 0.25;
+    pointer-events: none;
+}
+
+.dot-deco.d1 { top: 16px; right: 20px; width: 12px; height: 12px; }
+.dot-deco.d2 { bottom: 16px; left: 20px; width: 20px; height: 20px; opacity: 0.18; }
+.dot-deco.d3 { bottom: 40px; right: 28px; width: 8px; height: 8px; background: #564787; opacity: 0.12; }
+
+/* ----------------------------------------
+   Хедер — только название
+   ---------------------------------------- */
+.header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 2px solid #DBCBD8;
+    padding-bottom: 18px;
+    margin-bottom: 28px;
+}
+
+.logo-icon {
+    font-size: 32px;
+    line-height: 1;
+}
+
+.header h1 {
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    color: #564787;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ----------------------------------------
+   Страница "О проекте"
+   ---------------------------------------- */
+.page-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #564787;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.page-title small {
+    font-size: 16px;
+    font-weight: 400;
+    color: #8a7a9a;
+}
+
+.page-description {
+    color: #5a4a6a;
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 28px;
+}
+
+/* ----------------------------------------
+   Блок с контактами
+   ---------------------------------------- */
+.contact-block {
+    background: #f5f3fa;
+    border-radius: 16px;
+    padding: 18px 24px;
+    border-left: 5px solid #564787;
+    margin-bottom: 28px;
+}
+
+.contact-block p {
+    font-size: 15px;
+    color: #5a4a6a;
+}
+
+.contact-block a {
+    color: #564787;
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 2px solid #DBCBD8;
+    padding-bottom: 1px;
+    transition: all 0.2s;
+}
+
+.contact-block a:hover {
+    border-bottom-color: #564787;
+    color: #6b58a3;
+}
+
+/* ----------------------------------------
+   Кнопка "На главную"
+   ---------------------------------------- */
+.btn-home {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #564787;
+    color: #F2FDDF;
+    border: none;
+    padding: 10px 28px;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.25s;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(86, 71, 135, 0.25);
+}
+
+.btn-home:hover {
+    background: #6b58a3;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(86, 71, 135, 0.35);
+}
+
+.btn-home:active {
+    transform: scale(0.96);
+}
+
+/* ----------------------------------------
+   Футер
+   ---------------------------------------- */
+.footer {
+    margin-top: 28px;
+    padding-top: 18px;
+    border-top: 2px solid #DBCBD8;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 13px;
+    color: #8a7a9a;
+    font-weight: 500;
+}
+
+.footer a {
+    color: #564787;
+    text-decoration: none;
+    border-bottom: 1px solid #DBCBD8;
+    padding-bottom: 1px;
+    transition: all 0.2s;
+}
+
+.footer a:hover {
+    color: #6b58a3;
+    border-bottom-color: #564787;
+}
+
+/* ----------------------------------------
+   Адаптивность
+   ---------------------------------------- */
+@media (max-width: 640px) {
+    .container {
+        padding: 20px 18px;
+        border-radius: 24px;
+    }
+
+    .container::before {
+        left: 16px;
+        right: 16px;
+    }
+
+    .page-title {
+        font-size: 22px;
+        flex-wrap: wrap;
+    }
+
+    .page-title small {
+        font-size: 14px;
+    }
+
+    .footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .btn-home {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .contact-block {
+        padding: 14px 16px;
+    }
+
+    .contact-block p {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 420px) {
+    .header h1 {
+        font-size: 20px;
+    }
+
+    .logo-icon {
+        font-size: 26px;
+    }
+
+    .page-title {
+        font-size: 20px;
+    }
+
+    .page-description {
+        font-size: 15px;
+    }
+}
+
+/* ----------------------------------------
+   Анимация
+   ---------------------------------------- */
+.fade-in {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+}

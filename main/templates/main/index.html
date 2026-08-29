@@ -1,0 +1,108 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT-Дайджест | Soft Purple</title>
+    <link rel="stylesheet" href="{% static "main/css/index.css" %}">
+</head>
+<body>
+
+<div class="container fade-in" id="app">
+
+    <!-- Декоративные точки -->
+    <span class="dot-deco d1"></span>
+    <span class="dot-deco d2"></span>
+    <span class="dot-deco d3"></span>
+
+    <!-- ====== ШАПКА ====== -->
+    <header class="header">
+        <div class="header-left">
+            <span class="logo-icon">📡</span>
+            <h1>IT-Дайджест</h1>
+            <span class="header-badge">✦ Live</span>
+        </div>
+        <div class="update-info">
+            <span class="dot"></span>
+            <span>Обновлено: <strong id="updateTime">сегодня в 14:32</strong></span>
+        </div>
+    </header>
+
+    <!-- ====== КНОПКА ОБНОВЛЕНИЯ ====== -->
+    <div class="refresh-section">
+        <button class="btn-refresh" id="refreshBtn">
+            <span>⟳</span> Обновить дайджест
+        </button>
+        <span class="status-message" id="statusMsg">✅ Готов к работе</span>
+    </div>
+
+    <!-- ====== ОСНОВНОЙ ТЕКСТ (ДАЙДЖЕСТ) ====== -->
+    <div class="digest-summary" id="digestSummary">
+        <strong>🔥 Главное за час:</strong><br>
+        OpenAI представила GPT-4.5 с улучшенным пониманием контекста и снижением цены API на 30%.<br>
+        Google анонсировала новый фреймворк для AI-агентов с открытым исходным кодом.<br>
+        В Django обнаружена критическая уязвимость, выпущен срочный патч 4.2.15.
+    </div>
+
+    <!-- ====== СПИСОК СТАТЕЙ ====== -->
+    <div class="section-title">
+        📌 Подробнее
+        <span id="newsCount">3 новости</span>
+    </div>
+
+    <div class="article-list" id="articleList">
+
+        <!-- Карточка 1 -->
+        <div class="article-card">
+            <a href="#" target="_blank">OpenAI выпустила GPT-4.5 с улучшенным контекстом</a>
+            <div class="article-meta">
+                <span class="source">Habr</span>
+                <span>•</span>
+                <span>14:20</span>
+                <span class="tag">#AI</span>
+                <span class="tag">#OpenAI</span>
+            </div>
+        </div>
+
+        <!-- Карточка 2 -->
+        <div class="article-card">
+            <a href="#" target="_blank">Google Project Agent: новый фреймворк для AI-агентов</a>
+            <div class="article-meta">
+                <span class="source">Dev.to</span>
+                <span>•</span>
+                <span>13:45</span>
+                <span class="tag">#Google</span>
+                <span class="tag">#AI</span>
+            </div>
+        </div>
+
+        <!-- Карточка 3 -->
+        <div class="article-card">
+            <a href="#" target="_blank">Django 4.2.15: срочный патч безопасности</a>
+            <div class="article-meta">
+                <span class="source">Django Blog</span>
+                <span>•</span>
+                <span>12:10</span>
+                <span class="tag">#Django</span>
+                <span class="tag">#Security</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ====== ФУТЕР ====== -->
+    <footer class="footer">
+        <span>🤖 Сгенерировано с помощью DeepSeek</span>
+        <span>
+            <a href="#">Источники</a> •
+            <a href="#">О проекте</a>
+        </span>
+    </footer>
+
+</div>
+
+<script src="{% static "main/js/index.js" %}"></script>
+</body>
+</html>

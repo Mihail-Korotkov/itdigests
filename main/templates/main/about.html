@@ -1,0 +1,64 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О проекте | IT-Дайджест</title>
+    <link rel="stylesheet" href="{% static "main/css/about.css" %}">
+</head>
+<body>
+
+<div class="container fade-in">
+
+    <!-- Декоративные точки -->
+    <span class="dot-deco d1"></span>
+    <span class="dot-deco d2"></span>
+    <span class="dot-deco d3"></span>
+
+    <!-- ====== ХЕДЕР — ТОЛЬКО ЛОГОТИП И НАЗВАНИЕ ====== -->
+    <header class="header">
+        <span class="logo-icon">📡</span>
+        <h1>IT-Дайджест</h1>
+    </header>
+
+    <!-- ====== СТРАНИЦА "О ПРОЕКТЕ" ====== -->
+    <div class="page-title">
+        🧠 О проекте
+        <small>технологии и команда</small>
+    </div>
+
+    <p class="page-description">
+        <strong>IT-Дайджест</strong> — это автоматический агрегатор новостей для разработчиков.
+        Каждый час мы собираем свежие статьи из RSS-лент, а <strong>DeepSeek</strong> делает из них
+        краткий и понятный дайджест. Никакой регистрации — просто открываешь и читаешь.
+    </p>
+
+    <!-- ====== КОНТАКТЫ ====== -->
+    <div class="contact-block">
+        <p>
+            📬 <strong>Связаться с разработчиком:</strong>
+            <a href="#">Telegram</a> •
+            <a href="#">GitHub</a> •
+            <a href="#">Email</a>
+        </p>
+    </div>
+
+    <!-- ====== КНОПКА "НА ГЛАВНУЮ" ====== -->
+    <a href="#" class="btn-home">🏠 На главную</a>
+
+    <!-- ====== ФУТЕР ====== -->
+    <footer class="footer">
+        <span>🤖 Сгенерировано с помощью DeepSeek</span>
+        <span>
+            <a href="#">Источники</a> •
+            <a href="#">О проекте</a> •
+            <a href="#">Архив</a>
+        </span>
+    </footer>
+
+</div>
+
+</body>
+</html>
