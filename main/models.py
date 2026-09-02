@@ -2,6 +2,9 @@ from tabnanny import verbose
 
 from django.db import models
 
+from django.utils import timezone
+
+
 # Create your models here.
 class DaylyDijest(models.Model):
     title = models.CharField(max_length=200, default="IT-Дайджест")
@@ -15,7 +18,7 @@ class DaylyDijest(models.Model):
         verbose_name_plural = 'IT-Дайджесты'
 
     def __str__(self):
-        return f"Дайджест от {self.created_at.strftime('%d.%m.%Y')}"
+        return self.title
 
 class Article(models.Model):
     digist = models.ForeignKey(DaylyDijest, on_delete=models.CASCADE,related_name='articles')

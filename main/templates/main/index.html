@@ -39,11 +39,20 @@
     </div>
 
     <!-- ====== ОСНОВНОЙ ТЕКСТ (ДАЙДЖЕСТ) ====== -->
-    <div class="digest-summary" id="digestSummary">
+    {% comment %} <div class="digest-summary" id="digestSummary">
         <strong>🔥 Главное за час:</strong><br>
         OpenAI представила GPT-4.5 с улучшенным пониманием контекста и снижением цены API на 30%.<br>
         Google анонсировала новый фреймворк для AI-агентов с открытым исходным кодом.<br>
         В Django обнаружена критическая уязвимость, выпущен срочный патч 4.2.15.
+    </div> {% endcomment %}
+    <div class="digest-summary" id="digestSummary">
+    {% if digest %}
+        <strong>🔥 Главное за час:</strong><br>
+        {{ digest.summary|linebreaks }}
+    {% else %}
+        <strong>⏳ Дайджест пока не сгенерирован.</strong><br>
+        Нажмите «Обновить дайджест», чтобы собрать свежие новости.
+    {% endif %}
     </div>
 
     <!-- ====== СПИСОК СТАТЕЙ ====== -->
@@ -52,7 +61,7 @@
         <span id="newsCount">3 новости</span>
     </div>
 
-    <div class="article-list" id="articleList">
+    {% comment %} <div class="article-list" id="articleList">
 
         <!-- Карточка 1 -->
         <div class="article-card">
@@ -90,8 +99,22 @@
             </div>
         </div>
 
-    </div>
-
+    </div> {% endcomment %}
+    <div class="article-list" id="articleList">
+    {% for article in articles %}
+        <div class="article-card">
+            <a href="{{ article.url }}" target="_blank">{{ article.title }}</a>
+            <div class="article-meta">
+                <span class="source">{{ article.source }}</span>
+                <span>•</span>
+                <span>{{ article.published_at|date:"H:i" }}</span>
+                <!-- Теги можно генерировать отдельно или пока убрать -->
+            </div>
+        </div>
+    {% empty %}
+        <p>Новостей пока нет. Нажмите «Обновить дайджест».</p>
+    {% endfor %}
+</div>
     <!-- ====== ФУТЕР ====== -->
     <footer class="footer">
         <span>🤖 Сгенерировано с помощью DeepSeek</span>
