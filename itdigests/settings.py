@@ -26,8 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-9wlfpqe=nsv3gl3-kp@k4m&0t=*udq83g#zvbkbl4p3ik6)^f6'
 
-
-DEEPSEEK_API_KEY = os.getenv('DEEPSEEK_API_KEY')
+POLZA_AI_API_KEY = os.getenv('POLZA_AI_API_KEY')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -50,6 +49,17 @@ INSTALLED_APPS = [
     'main',
     
 ]
+
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+
+
+CELERY_TIMEZONE = 'UTC'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

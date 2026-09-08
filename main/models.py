@@ -12,7 +12,7 @@ class DaylyDijest(models.Model):
     created_at =models.DateTimeField(auto_now_add=True)
     is_published = models.BooleanField(default=True)
 
-    class meta:
+    class Мeta:
         ordering  = ['-created_at']
         verbose_name = 'IT-Дайджест'
         verbose_name_plural = 'IT-Дайджесты'
@@ -21,7 +21,7 @@ class DaylyDijest(models.Model):
         return self.title
 
 class Article(models.Model):
-    digist = models.ForeignKey(DaylyDijest, on_delete=models.CASCADE,related_name='articles')
+    digest = models.ForeignKey(DaylyDijest, on_delete=models.CASCADE,related_name='articles')
     title = models.CharField(max_length=500)
     url = models.URLField(unique=True)
     source = models.CharField(max_length=100)
@@ -29,8 +29,8 @@ class Article(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     
-    class meta:
-        ordering  = ['-Published_at']
+    class Мeta:
+        ordering  = ['-published_at']
         verbose_name = 'Статья'
         verbose_name_plural = 'Статьи'
 

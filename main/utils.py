@@ -31,6 +31,48 @@ SOURCES = [
     },
 ]
 
+def get_deepseek_digest_from_titles(articles_data):
+    """Генерирует дайджест из списка словарей с заголовками (еще не сохраненных в БД)"""
+    import os
+    from openai import OpenAI
+
+    client = OpenAI(
+            api_key=os.getenv('POLZA_AI_API_KEY'),
+            base_url="https://polza.ai/api/v1"  # или другой endpoint
+        )
+    
+    # Формируем список заголовков
+    titles = "\n".join([f"- {a['title']}" for a in articles_data[:10]])
+    
+    prompt = f"""
+    Ты — редактор IT-новостей. Напиши краткий дайджест (3-5 предложений) 
+    на основе этих заголовков. Выдели самое важное и интересное.
+    
+    Заголовки новостей за последний час:
+    {titles}
+    
+    Дайджест:
+    """
+    
+    try:
+        response = client.chat.completions.create(
+            model="deepseek/deepseek-v4-flash",
+            messages=[
+                {"role": "system", "content": "Ты — профессиональный редактор IT-новостей. Пиши кратко и по делу."},
+                {"role": "user", "content": prompt}
+            ],
+            max_tokens=300,
+            temperature=0.7,
+        )
+        return response.choices[0].message.content.strip()
+    except Exception as e:
+        print(f"Ошибка DeepSeek: {e}")
+        # Фолбэк: просто склеиваем заголовки
+        return "\n".join([f"- {a['title']}" for a in articles_data[:5]])
+
+
+
+
 def fetch_articles_from_rss():
     """Собирает свежие статьи из RSS-лент"""
     articles = []
@@ -79,8 +121,8 @@ def get_deepseek_digest(articles):
 
     # Если у вас установлена библиотека openai
     client = OpenAI(
-        api_key=os.getenv('DEEPSEEK_API_KEY'),
-        base_url="https://api.deepseek.com/v1"  # или другой endpoint
+        api_key=os.getenv('POLZA_AI_API_KEY'),
+        base_url="https://polza.ai/api/v1"  # или другой endpoint
     )
     
     # Формируем список заголовков для AI
@@ -98,7 +140,7 @@ def get_deepseek_digest(articles):
     
     try:
         response = client.chat.completions.create(
-            model="deepseek-chat",
+            model="deepseek/deepseek-v4-flash",
             messages=[
                 {"role": "system", "content": "Ты — профессиональный редактор IT-новостей. Пиши кратко и по делу."},
                 {"role": "user", "content": prompt}
