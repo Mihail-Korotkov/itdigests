@@ -42,7 +42,7 @@ def get_deepseek_digest_from_titles(articles_data):
         )
     
     # Формируем список заголовков
-    titles = "\n".join([f"- {a['title']}" for a in articles_data[:10]])
+    titles = "\n".join([f"- {a['title']}" for a in articles_data[:4]])
     
     prompt = f"""
     Ты — редактор IT-новостей. Напиши краткий дайджест (3-5 предложений) 
@@ -56,7 +56,7 @@ def get_deepseek_digest_from_titles(articles_data):
     
     try:
         response = client.chat.completions.create(
-            model="deepseek/deepseek-v4-flash",
+            model="deepseek-v4-flash",
             messages=[
                 {"role": "system", "content": "Ты — профессиональный редактор IT-новостей. Пиши кратко и по делу."},
                 {"role": "user", "content": prompt}
@@ -64,7 +64,8 @@ def get_deepseek_digest_from_titles(articles_data):
             max_tokens=300,
             temperature=0.7,
         )
-        return response.choices[0].message.content.strip()
+                  
+        return response.choices[0].message.content.strip()   
     except Exception as e:
         print(f"Ошибка DeepSeek: {e}")
         # Фолбэк: просто склеиваем заголовки
@@ -97,59 +98,59 @@ def fetch_articles_from_rss():
     return articles
 
 
-def save_articles_to_db(articles):
-    """Сохраняет статьи в БД, пропуская дубликаты по URL"""
-    saved_count = 0
-    for data in articles:
-        article, created = Article.objects.get_or_create(
-            url=data['url'],
-            defaults={
-                'title': data['title'],
-                'source': data['source'],
-                'published_at': data['published_at'],
-            }
-        )
-        if created:
-            saved_count += 1
-    return saved_count
+# def save_articles_to_db(articles):
+#     """Сохраняет статьи в БД, пропуская дубликаты по URL"""
+#     saved_count = 0
+#     for data in articles:
+#         article, created = Article.objects.get_or_create(
+#             url=data['url'],
+#             defaults={
+#                 'title': data['title'],
+#                 'source': data['source'],
+#                 'published_at': data['published_at'],
+#             }
+#         )
+#         if created:
+#             saved_count += 1
+#     return saved_count
 
 
-def get_deepseek_digest(articles):
-    """Отправляет заголовки статей в DeepSeek и получает связный дайджест"""
-    import os
-    from openai import OpenAI  # или используйте requests для совместимости
+# def get_deepseek_digest(articles):
+#     """Отправляет заголовки статей в DeepSeek и получает связный дайджест"""
+#     import os
+#     from openai import OpenAI  # или используйте requests для совместимости
 
-    # Если у вас установлена библиотека openai
-    client = OpenAI(
-        api_key=os.getenv('POLZA_AI_API_KEY'),
-        base_url="https://polza.ai/api/v1"  # или другой endpoint
-    )
+#     # Если у вас установлена библиотека openai
+#     client = OpenAI(
+#         api_key=os.getenv('POLZA_AI_API_KEY'),
+#         base_url="https://polza.ai/api/v1"  # или другой endpoint
+#     )
     
-    # Формируем список заголовков для AI
-    titles = "\n".join([f"- {a.title}" for a in articles])
+#     # Формируем список заголовков для AI
+#     titles = "\n".join([f"- {a.title}" for a in articles])
     
-    prompt = f"""
-    Ты — редактор IT-новостей. Напиши краткий дайджест (3-5 предложений) 
-    на основе этих заголовков. Выдели самое важное и интересное.
+#     prompt = f"""
+#     Ты — редактор IT-новостей. Напиши краткий дайджест (3-5 предложений) 
+#     на основе этих заголовков. Выдели самое важное и интересное.
     
-    Заголовки новостей за последний час:
-    {titles}
+#     Заголовки новостей за последний час:
+#     {titles}
     
-    Дайджест:
-    """
+#     Дайджест:
+#     """
     
-    try:
-        response = client.chat.completions.create(
-            model="deepseek/deepseek-v4-flash",
-            messages=[
-                {"role": "system", "content": "Ты — профессиональный редактор IT-новостей. Пиши кратко и по делу."},
-                {"role": "user", "content": prompt}
-            ],
-            max_tokens=300,
-            temperature=0.7,
-        )
-        return response.choices[0].message.content.strip()
-    except Exception as e:
-        print(f"Ошибка DeepSeek: {e}")
-        # Фолбэк: просто склеиваем заголовки
-        return "\n".join([f"- {a.title}" for a in articles[:5]])
+#     try:
+#         response = client.chat.completions.create(
+#             model="deepseek/deepseek-v4-flash",
+#             messages=[
+#                 {"role": "system", "content": "Ты — профессиональный редактор IT-новостей. Пиши кратко и по делу."},
+#                 {"role": "user", "content": prompt}
+#             ],
+#             max_tokens=300,
+#             temperature=0.7,
+#         )
+#         return response.choices[0].message.content.strip()
+#     except Exception as e:
+#         print(f"Ошибка DeepSeek: {e}")
+#         # Фолбэк: просто склеиваем заголовки
+#         return "\n".join([f"- {a.title}" for a in articles[:5]])

@@ -1,9 +1,7 @@
 from celery import shared_task
 from django.utils import timezone
 from .models import DaylyDijest, Article
-from .utils import fetch_articles_from_rss, get_deepseek_digest_from_titles, save_articles_to_db, get_deepseek_digest
-
-# @shared_task
+from .utils import fetch_articles_from_rss, get_deepseek_digest_from_titles
 # def generate_digest():
 #     """Главная задача: парсим новости, генерируем дайджест, сохраняем"""
     
@@ -61,7 +59,7 @@ def generate_digest():
     
     # 4. Теперь сохраняем статьи и привязываем к digest
     saved_count = 0
-    for data in articles_data[:10]:  # берем первые 10
+    for data in articles_data[:4]:  # берем первые 4
         article, created = Article.objects.get_or_create(
             url=data['url'],
             defaults={
